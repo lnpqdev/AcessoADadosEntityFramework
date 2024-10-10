@@ -9,7 +9,7 @@ namespace DevFreela.API.Controllers
     {
         // GET api/skills
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(CreateSkillInputModel model)
         {
             return Ok();
         }
