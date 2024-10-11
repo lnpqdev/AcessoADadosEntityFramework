@@ -29,7 +29,7 @@ namespace DevFreela.API.Persistence
             {
                 e.HasKey(us => us.Id);
                 e.HasOne(u => u.Skill)
-                .WithMany(u => UserSkills)
+                .WithMany(u => u.UserSkills)
                 .HasForeignKey(u => u.IdSkill)
                 .OnDelete(DeleteBehavior.Restrict);
             });

@@ -2,9 +2,9 @@ namespace DevFreela.API.Entities
 {
     public class User : BaseEntity
     {
-        public User(string fullname, string email, DateTime birthDate) : base()
+        public User(string fullName, string email, DateTime birthDate) : base()
         {
-            FullName = fullname;
+            FullName = fullName;
             Email = email;
             BirthDate = birthDate;
             Active = true;

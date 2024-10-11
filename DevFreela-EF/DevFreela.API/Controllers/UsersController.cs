@@ -11,7 +11,6 @@ namespace DevFreela.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-
         public UsersController(DevFreelaDbContext context)
         {
             _context = context;

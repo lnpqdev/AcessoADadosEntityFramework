@@ -1,8 +1,8 @@
 namespace DevFreela.API.Entities
 {
-    public class BaseEntity {
+    public abstract class BaseEntity {
 
-        public BaseEntity()
+        protected BaseEntity()
         {
             CreatedAt = DateTime.Now;
             IsDeleted = false;
