@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DevFreela.API.Entities;
+﻿using DevFreela.API.Entities;
 
 namespace DevFreela.API.Models
 {
     public class UserViewModel
     {
-          public UserViewModel(string fullName, string email, DateTime birthDate, List<string> skills)
+        public UserViewModel(string fullName, string email, DateTime birthDate, List<string> skills)
         {
             FullName = fullName;
             Email = email;

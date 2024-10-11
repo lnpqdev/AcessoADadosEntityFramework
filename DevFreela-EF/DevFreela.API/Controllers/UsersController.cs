@@ -33,6 +33,7 @@ namespace DevFreela.API.Controllers
 
             return Ok(model);
         }
+
         // POST api/users
         [HttpPost]
         public IActionResult Post(CreateUserInputModel model)
@@ -45,26 +46,25 @@ namespace DevFreela.API.Controllers
             return NoContent();
         }
 
+        [HttpPost("{id}/skills")]
+        public IActionResult PostSkills(int id, UserSkillsInputModel model)
+        {
+            var userSkills = model.SkillIds.Select(s => new UserSkill(id, s)).ToList();
+
+            _context.UserSkills.AddRange(userSkills);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}/profile-picture")]
-        public IActionResult PostProfilePicture(IFormFile file)
+        public IActionResult PostProfilePicture(int id, IFormFile file)
         {
             var description = $"FIle: {file.FileName}, Size: {file.Length}";
 
             // Processar a imagem
 
             return Ok(description);
-        }
-
-        [HttpPost("{id}/skills")]
-        public IActionResult PostSkills(int id, UserSkillsInputModel model)
-        {
-
-            var userSkills = model.SkillsIds.Select(s => new UserSkill(id, s)).ToList();
-
-            _context.UserSkills.AddRange(userSkills);
-            _context.SaveChanges();
-
-            return NoContent();
         }
     }
 }

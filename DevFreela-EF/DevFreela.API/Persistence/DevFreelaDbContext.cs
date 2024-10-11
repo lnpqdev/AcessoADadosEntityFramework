@@ -1,13 +1,14 @@
-using DevFreela.API.Entities;
+﻿using DevFreela.API.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevFreela.API.Persistence
 {
     public class DevFreelaDbContext : DbContext
     {
-        public DevFreelaDbContext(DbContextOptions<DevFreelaDbContext> options) : base(options)
+        public DevFreelaDbContext(DbContextOptions<DevFreelaDbContext> options)
+            : base(options)
         {
-
+            
         }
 
         public DbSet<Project> Projects { get; set; }
@@ -19,31 +20,32 @@ namespace DevFreela.API.Persistence
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
-            .Entity<Skill>(e =>
-            {
-                e.HasKey(s => s.Id);
-            });
+                .Entity<Skill>(e =>
+                {
+                    e.HasKey(s => s.Id);
+                });
 
             builder
-            .Entity<UserSkill>(e =>
-            {
-                e.HasKey(us => us.Id);
-                e.HasOne(u => u.Skill)
-                .WithMany(u => u.UserSkills)
-                .HasForeignKey(u => u.IdSkill)
-                .OnDelete(DeleteBehavior.Restrict);
-            });
+                .Entity<UserSkill>(e =>
+                {
+                    e.HasKey(us => us.Id);
+
+                    e.HasOne(u => u.Skill)
+                        .WithMany(u => u.UserSkills)
+                        .HasForeignKey(s => s.IdSkill)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
 
             builder
-    .Entity<ProjectComment>(e =>
-    {
-        e.HasKey(p => p.Id);
+                .Entity<ProjectComment>(e =>
+                {
+                    e.HasKey(p => p.Id);
 
-        e.HasOne(p => p.Project)
-            .WithMany(p => p.Comments)
-            .HasForeignKey(p => p.IdProject)
-            .OnDelete(DeleteBehavior.Restrict);
-    });
+                    e.HasOne(p => p.Project)
+                        .WithMany(p => p.Comments)
+                        .HasForeignKey(p => p.IdProject)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
 
             builder
                 .Entity<User>(e =>

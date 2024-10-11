@@ -10,17 +10,18 @@ namespace DevFreela.API.Controllers
     [ApiController]
     public class SkillsController : ControllerBase
     {
-        // GET api/skills
         private readonly DevFreelaDbContext _context;
         public SkillsController(DevFreelaDbContext context)
         {
             _context = context;
         }
-        
+
+        // GET api/skills
         [HttpGet]
         public IActionResult GetAll()
         {
-             var skills = _context.Skills.ToList();
+            var skills = _context.Skills.ToList();
+
             return Ok(skills);
         }
 

@@ -20,15 +20,19 @@ namespace DevFreela.API.Controllers
 
         // GET api/projects?search=crm
         [HttpGet]
-        public IActionResult Get(string search = "")
+        public IActionResult Get(string search = "", int page = 0, int size = 3)
         {
             var projects = _context.Projects
-            .Include(p => p.Client)
-            .Include(p => p.Freelancer)
-            .Where(p => !p.IsDeleted).ToList();
+                .Include(p => p.Client)
+                .Include(p => p.Freelancer)
+                .Where(p => !p.IsDeleted && (search == "" || p.Title.Contains(search) || p.Description.Contains(search)))
+                .Skip(page * size)
+                .Take(size)
+                .ToList();
 
             var model = projects.Select(ProjectItemViewModel.FromEntity).ToList();
-            return Ok(projects);
+
+            return Ok(model);
         }
 
         // GET api/projects/1234
@@ -36,12 +40,13 @@ namespace DevFreela.API.Controllers
         public IActionResult GetById(int id)
         {
             var project = _context.Projects
-           .Include(p => p.Client)
-           .Include(p => p.Freelancer)
-           .Include(p => p.Comments)
-           .SingleOrDefault(p => p.Id == id);
+                .Include(p => p.Client)
+                .Include(p => p.Freelancer)
+                .Include(p => p.Comments)
+                .SingleOrDefault(p => p.Id == id);
 
-            var model = ProjectItemViewModel.FromEntity(project);
+            var model = ProjectViewModel.FromEntity(project);
+
             return Ok(model);
         }
 
@@ -50,9 +55,11 @@ namespace DevFreela.API.Controllers
         public IActionResult Post(CreateProjectInputModel model)
         {
             var project = model.ToEntity();
+
             _context.Projects.Add(project);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
+
+             return CreatedAtAction(nameof(GetById), new { id = 1 }, model);
         }
 
         // PUT api/projects/1234
@@ -78,7 +85,7 @@ namespace DevFreela.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-             var project = _context.Projects.SingleOrDefault(p => p.Id == id);
+            var project = _context.Projects.SingleOrDefault(p => p.Id == id);
 
             if (project is null)
             {
@@ -96,7 +103,7 @@ namespace DevFreela.API.Controllers
         [HttpPut("{id}/start")]
         public IActionResult Start(int id)
         {
-             var project = _context.Projects.SingleOrDefault(p => p.Id == id);
+            var project = _context.Projects.SingleOrDefault(p => p.Id == id);
 
             if (project is null)
             {

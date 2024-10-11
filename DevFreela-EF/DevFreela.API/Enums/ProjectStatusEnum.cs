@@ -1,4 +1,4 @@
-namespace DevFreela.API.Enums
+﻿namespace DevFreela.API.Enums
 {
     public enum ProjectStatusEnum
     {

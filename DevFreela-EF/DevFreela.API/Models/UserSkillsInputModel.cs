@@ -1,8 +1,8 @@
-namespace DevFreela.API.Models
+﻿namespace DevFreela.API.Models
 {
     public class UserSkillsInputModel
     {
-        public int[] SkillsIds { get; set; }
-        public int id { get; set; }
+        public int[] SkillIds { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,13 +1,13 @@
-using System;
-using DevFreela.API.Controllers;
+﻿using DevFreela.API.Controllers;
 using DevFreela.API.Enums;
 
 namespace DevFreela.API.Entities
 {
     public class Project : BaseEntity
     {
-        protected Project(){ }
-        public Project(string title, string description, int idClient, int idFreelancer, decimal totalCost) : base()
+        protected Project() { }
+        public Project(string title, string description, int idClient, int idFreelancer, decimal totalCost)
+            : base()
         {
             Title = title;
             Description = description;
@@ -47,6 +47,7 @@ namespace DevFreela.API.Entities
                 StartedAt = DateTime.Now;
             }
         }
+
         public void Complete()
         {
             if (Status == ProjectStatusEnum.PaymentPending || Status == ProjectStatusEnum.InProgress)

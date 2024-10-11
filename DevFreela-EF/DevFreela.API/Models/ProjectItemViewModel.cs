@@ -1,9 +1,10 @@
-using DevFreela.API.Entities;
+﻿using DevFreela.API.Entities;
 
 namespace DevFreela.API.Models
 {
-    public class ProjectItemViewModel {
-   public ProjectItemViewModel(int id, string title, string clientName, string freelancerName, decimal totalCost)
+    public class ProjectItemViewModel
+    {
+        public ProjectItemViewModel(int id, string title,string clientName, string freelancerName, decimal totalCost)
         {
             Id = id;
             Title = title;
@@ -18,8 +19,7 @@ namespace DevFreela.API.Models
         public string FreelancerName { get; private set; }
         public decimal TotalCost { get; private set; }
 
-        //método converte um objeto Project em um objeto ProjectItemViewModel, extraindo e utilizando propriedades específicas do objeto Project.
         public static ProjectItemViewModel FromEntity(Project project)
-        => new(project.Id, project.Title, project.Client.FullName, project.Freelancer.FullName, project.TotalCost);
+            => new(project.Id, project.Title, project.Client.FullName, project.Freelancer.FullName, project.TotalCost);
     }
 }
