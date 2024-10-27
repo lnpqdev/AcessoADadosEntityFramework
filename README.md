@@ -1,4 +1,4 @@
-# 
+# Acesso a Dados com EF Core
 
 Bem-vindo ao repositório de **Acesso a Dados com EF Core**! Este repositório tem como objetivo demonstrar como é feito a configuração e acesso a dados no Entity Framework
 usando.Net 8.
